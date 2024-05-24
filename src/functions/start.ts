@@ -48,6 +48,7 @@ export const handler: ServerlessFunctionSignature<MyContext, MyEvent> =
           to_number: event.To,
           metadata: { twilio_call_sid: event.CallSid },
         });
+
       if (callResponse) {
         // Start phone call websocket
         const response = new VoiceResponse();
