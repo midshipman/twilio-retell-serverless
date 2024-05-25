@@ -46,6 +46,7 @@ export const handler: ServerlessFunctionSignature<MyContext, MyEvent> =
           sample_rate: 8000,
           from_number: event.From,
           to_number: event.To,
+          retell_llm_dynamic_variables: {"phone number": event.From},
           metadata: { twilio_call_sid: event.CallSid },
         });
 
