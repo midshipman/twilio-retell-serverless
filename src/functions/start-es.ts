@@ -24,6 +24,7 @@ type MyEvent = {
 type MyContext = {
   RETELL_API_KEY: string;
   RETELL_AGENT_ID: string;
+  RETELL_AGENT_ID_ES: string;
 };
 
 export const handler: ServerlessFunctionSignature<MyContext, MyEvent> =
@@ -40,7 +41,7 @@ export const handler: ServerlessFunctionSignature<MyContext, MyEvent> =
 
       const callResponse: RegisterCallResponse =
         await retellClient.call.register({
-          agent_id: event.agent_id || context.RETELL_AGENT_ID,
+          agent_id: event.agent_id || context.RETELL_AGENT_ID_ES,
           audio_websocket_protocol: "twilio",
           audio_encoding: "mulaw",
           sample_rate: 8000,

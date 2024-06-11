@@ -19,10 +19,10 @@ exports.handler =  async function (context, event, callback) {
         var record =  base('builder').find(event.id);
         if (record) {
             
-            var description = "Description: \n" + (await record).get('Description') + "\n";
-            var flow = "Voice Flow: \n" + (await record).get('Voice Flow') + "\n";
-            var plan = "Flights Plan: \n " + (await record).get('Flights Plan');
-            var bookings = "Bookings: \n" + (await record).get('Bookings') + "\n";
+            var description = (await record).get('Description') + "\n";
+            var flow = (await record).get('Voice Flow') + "\n";
+            var plan = (await record).get('Flights Plan') + "\n";
+            var bookings = (await record).get('Bookings') + "\n";
 
             var prompt = description +  plan + bookings + flow;
             console.log(`new prompt: \n`, prompt);
@@ -30,6 +30,9 @@ exports.handler =  async function (context, event, callback) {
             // update the prompt to retell agent
             const retell = new Retell({apiKey: context.RETELL_API_KEY,});
             await retell.llm.update(context.RETELL_LLM_ID, {general_prompt:prompt});
+            
+            var prompt_es = "You are an agent only speak Spanish \n" + prompt
+            await retell.llm.update(context.RETELL_LLM_ID_ES, {general_prompt:prompt_es});
             // retell.llm.update(context.RETELL_LLM_ID, {model:"gpt-4o"});
         }
     }
@@ -38,5 +41,5 @@ exports.handler =  async function (context, event, callback) {
         return callback(null, "Sorry, something went wrong, please try again!");
     }
 
-    return callback(null, "Your Voice Assistant is ready!");
+    return callback(null, "Your Voice Assistant is ready, you can call +44 7700 176203 now!");
 };

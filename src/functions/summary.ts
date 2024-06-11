@@ -62,7 +62,7 @@ export const handler = async function(context, event, callback) {
         await twilioClient.messages.create({
             from: 'ABC Airline',
             body: sms_summary,
-            to: '+4917673552924',
+            to: event.data.from_number,
           });
         console.log(`SMS sent successfully`);
       } 
