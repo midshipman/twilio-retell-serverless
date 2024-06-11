@@ -3,6 +3,11 @@ Connect you existing Twilio account to Retell AI with a simple serverless functi
 
 This project is simply one function that you can configure on your Twilio phone number.
 
+Added functions:
+- summarize the call and send it via SMS and email
+- include a sample Airline prompt to change the flight
+- use Airtable form to modify prompt, and update it for agent
+
 **Note** This is a typescript project, the output is in the `dist/` folder
 
 Configure the retell `agent_id` as **either** an environment variable or a query parameter. The query parameter will take precedent.
